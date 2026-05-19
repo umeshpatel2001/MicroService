@@ -1,5 +1,6 @@
 package com.test.ecommerce.order_service.controller;
 
+import com.test.ecommerce.order_service.clients.InventoryOpenFeignClient;
 import com.test.ecommerce.order_service.dto.OrderRequestDto;
 import com.test.ecommerce.order_service.service.OrdersService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +22,12 @@ public class OrdersController {
     @GetMapping("/helloOrders")
     public String helloOrders() {
         return "Hello from Orders Service";
+    }
+
+    @PostMapping("/create-order")
+    public ResponseEntity<OrderRequestDto> createOrder(@RequestBody OrderRequestDto orderRequestDto) {
+        OrderRequestDto orderRequestDto1 = orderService.createOrder(orderRequestDto);
+        return ResponseEntity.ok(orderRequestDto1);
     }
 
     @GetMapping
